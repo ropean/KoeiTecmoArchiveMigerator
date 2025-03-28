@@ -1,0 +1,41 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- Application Texts -->
+    <sys:String x:Key="AppTitle">光荣存档迁移工具</sys:String>
+
+    <!-- Main Window UI -->
+    <sys:String x:Key="LabelRootDir">根目录：</sys:String>
+    <sys:String x:Key="ButtonBrowse">浏览</sys:String>
+    <sys:String x:Key="LabelGame">游戏：</sys:String>
+    <sys:String x:Key="LabelSteamId">Steam ID：</sys:String>
+
+    <!-- DataGrid Columns -->
+    <sys:String x:Key="ColumnSelect">选择</sys:String>
+    <sys:String x:Key="ColumnName">名称</sys:String>
+    <sys:String x:Key="ColumnStatus">状态</sys:String>
+    <sys:String x:Key="ButtonMigrate">迁移所选</sys:String>
+
+    <!-- Menu Items -->
+    <sys:String x:Key="MenuLanguage">语言</sys:String>
+    <sys:String x:Key="MenuChinese">简体中文</sys:String>
+    <sys:String x:Key="MenuEnglish">英文</sys:String>
+    <sys:String x:Key="MenuAbout">关于</sys:String>
+
+    <!-- Status Messages -->
+    <sys:String x:Key="StatusSuccess">成功 ✔</sys:String>
+    <sys:String x:Key="StatusNeedsMigration">需要修改 ⚠</sys:String>
+    <sys:String x:Key="StatusUnknown">未知 ✗</sys:String>
+    <sys:String x:Key="StatusFileMissing">文件缺失 ✗</sys:String>
+
+    <!-- Error Messages -->
+    <sys:String x:Key="ErrorTitle">错误</sys:String>
+    <sys:String x:Key="ErrorDirReadFailed">无法读取目录：{0}</sys:String>
+    <sys:String x:Key="ErrorSteamIdReadFailed">无法读取Steam ID目录：{0}</sys:String>
+    <sys:String x:Key="ErrorArchiveLoadFailed">无法加载存档：{0}</sys:String>
+
+    <!-- About Text -->
+    <sys:String x:Key="AboutText">光荣存档迁移工具\n版本 1.0\n作者：[Your Name]\n源码：[Link TBD]</sys:String>
+
+    <sys:String x:Key="SelectFolderText">Select Folder</sys:String>
+</ResourceDictionary>
