@@ -35,7 +35,7 @@
     <sys:String x:Key="ErrorArchiveLoadFailed">无法加载存档：{0}</sys:String>
 
     <!-- About Text -->
-    <sys:String x:Key="AboutText">光荣存档迁移工具\n版本 1.0\n作者：[Your Name]\n源码：[Link TBD]</sys:String>
+    <sys:String x:Key="AboutText">光荣存档迁移工具\n版本 1.0\n作者：ropean\n源码：https://github.com/ropean/KoeiTecmoArchiveMigerator/blob/main/README-CN.md</sys:String>
 
     <sys:String x:Key="SelectFolderText">Select Folder</sys:String>
 </ResourceDictionary>

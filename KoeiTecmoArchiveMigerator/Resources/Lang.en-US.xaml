@@ -35,7 +35,7 @@
     <sys:String x:Key="ErrorArchiveLoadFailed">Failed to load archives: {0}</sys:String>
 
     <!-- About Text -->
-    <sys:String x:Key="AboutText">Koei Tecmo Archive Migrator\nVersion 1.0\nCreated by [Your Name]\nSource: [Link TBD]</sys:String>
+    <sys:String x:Key="AboutText">Koei Tecmo Archive Migrator\nVersion 1.0\nCreated by ropean\nSource: https://github.com/ropean/KoeiTecmoArchiveMigerator</sys:String>
 
     <sys:String x:Key="SelectFolderText">选择文件夹</sys:String>
 </ResourceDictionary>

@@ -260,7 +260,7 @@ namespace KoeiTecmoArchiveMigrator
 
     private void About_Click(object sender, RoutedEventArgs e)
     {
-      MessageBox.Show(GetResources("AboutText"), GetResources("MenuAbout"), MessageBoxButton.OK, MessageBoxImage.Information);
+      MessageBox.Show(GetResources("AboutText").Replace(@"\n", Environment.NewLine), GetResources("MenuAbout"), MessageBoxButton.OK, MessageBoxImage.Information);
     }
   }
 
