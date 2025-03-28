@@ -5,130 +5,214 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="{DynamicResource AppTitle}"
-        Height="400"
-        Width="600">
-        <Grid Margin="10">
-                <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        Height="450"
+        Width="600"
+        ResizeMode="CanMinimize">
+  <Grid Margin="10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <!-- New row for menu -->
+      <RowDefinition Height="Auto"/>
+      <!-- Root Directory -->
+      <RowDefinition Height="Auto"/>
+      <!-- Game and SteamID Selection -->
+      <RowDefinition Height="*"/>
+      <!-- Archive List -->
+      <RowDefinition Height="Auto"/>
+      <!-- Migrate Button -->
+    </Grid.RowDefinitions>
 
-                <!-- Row 1: Root Directory -->
-                <StackPanel Orientation="Horizontal"
-                            Grid.Row="0"
-                            Margin="0,0,0,10">
-                        <TextBlock Text="{DynamicResource LabelRootDir}"
+    <!-- Row 0: Menu -->
+    <Menu Grid.Row="0" HorizontalAlignment="Left">
+      <MenuItem Header="{DynamicResource MenuLanguage}">
+        <MenuItem x:Name="ChineseMenuItem" 
+                 Header="{DynamicResource MenuChinese}"
+                 Click="LanguageChinese_Click"/>
+        <MenuItem x:Name="EnglishMenuItem" 
+                 Header="{DynamicResource MenuEnglish}"
+                 Click="LanguageEnglish_Click"
+                 IsChecked="True"/>
+      </MenuItem>
+      <MenuItem Header="{DynamicResource MenuAbout}"
+              Click="About_Click"/>
+    </Menu>
+
+    <!-- Row 1: Root Directory -->
+    <StackPanel Orientation="Horizontal"
+                            Grid.Row="1"
+                            Margin="0,10,0,10">
+      <TextBlock Text="{DynamicResource LabelRootDir}"
                                    VerticalAlignment="Center"
                                    Margin="0,0,10,0"/>
-                        <TextBox x:Name="RootDirTextBox"
-                                 Width="400"
+      <TextBox x:Name="RootDirTextBox"
+                                 Width="380"
                                  Margin="0,0,10,0"/>
-                        <Button x:Name="BrowseButton"
+      <Button x:Name="BrowseButton"
                                 Content="{DynamicResource ButtonBrowse}"
                                 Width="80"
                                 Click="BrowseButton_Click"/>
-                </StackPanel>
+    </StackPanel>
 
-                <!-- Row 2: Game and SteamID Selection -->
-                <Grid Grid.Row="1"
+    <!-- Row 2: Game and SteamID Selection -->
+    <Grid Grid.Row="2"
                       Margin="0,0,0,10">
-                        <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal"
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <StackPanel Orientation="Horizontal"
                                     Grid.Column="0"
                                     Margin="0,0,10,0">
-                                <TextBlock Text="{DynamicResource LabelGame}"
+        <TextBlock Text="{DynamicResource LabelGame}"
                                            VerticalAlignment="Center"
                                            Margin="0,0,10,0"/>
-                                <ComboBox x:Name="GameComboBox"
+        <ComboBox x:Name="GameComboBox"
                                           Width="200"
                                           SelectionChanged="GameComboBox_SelectionChanged"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"
+      </StackPanel>
+      <StackPanel Orientation="Horizontal"
                                     Grid.Column="1">
-                                <TextBlock Text="{DynamicResource LabelSteamId}"
+        <TextBlock Text="{DynamicResource LabelSteamId}"
                                            VerticalAlignment="Center"
                                            Margin="0,0,10,0"/>
-                                <ComboBox x:Name="SteamIdComboBox"
+        <ComboBox x:Name="SteamIdComboBox"
                                           Width="200"
                                           SelectionChanged="SteamIdComboBox_SelectionChanged"/>
-                        </StackPanel>
-                </Grid>
+      </StackPanel>
+    </Grid>
 
-                <!-- Row 3: Archive List -->
-                <DataGrid x:Name="ArchiveDataGrid"
-                          Grid.Row="2"
-                          AutoGenerateColumns="False"
-                          CanUserAddRows="False"
-                          SelectionChanged="ArchiveDataGrid_SelectionChanged">
-                        <DataGrid.Columns>
-                                <DataGridCheckBoxColumn Header="{DynamicResource ColumnSelect}"
-                                                        Binding="{Binding IsSelected}"/>
-                                <DataGridTextColumn Header="{DynamicResource ColumnName}"
-                                                    Binding="{Binding Name}"
-                                                    IsReadOnly="True"
-                                                    Width="*"/>
-                                <DataGridTextColumn Header="{DynamicResource ColumnStatus}"
-                                                    Binding="{Binding Status}"
-                                                    IsReadOnly="True"
-                                                    Width="*">
-                                        <DataGridTextColumn.ElementStyle>
-                                                <Style TargetType="TextBlock">
-                                                        <Setter Property="Foreground"
-                                                                Value="Black"/>
-                                                        <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding StatusValue}"
-                                                                             Value="Success">
-                                                                        <Setter Property="Foreground"
-                                                                                Value="Green"/>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding StatusValue}"
-                                                                             Value="NeedsMigration">
-                                                                        <Setter Property="Foreground"
-                                                                                Value="Orange"/>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding StatusValue}"
-                                                                             Value="Unknown">
-                                                                        <Setter Property="Foreground"
-                                                                                Value="Gray"/>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding StatusValue}"
-                                                                             Value="FileMissing">
-                                                                        <Setter Property="Foreground"
-                                                                                Value="Red"/>
-                                                                </DataTrigger>
-                                                        </Style.Triggers>
-                                                </Style>
-                                        </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                        </DataGrid.Columns>
-                </DataGrid>
+    <!-- Row 3: Archive List -->
+    <DataGrid x:Name="ArchiveDataGrid"
+          Grid.Row="3"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          SelectionUnit="FullRow"
+          SelectionMode="Single"
+          SelectionChanged="ArchiveDataGrid_SelectionChanged">
 
-                <!-- Row 4: Migrate Button -->
-                <Button x:Name="MigrateButton"
-                        Grid.Row="3"
+      <!-- Override system selection colors to prevent white text -->
+      <DataGrid.Resources>
+        <!-- Background color for selected rows -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFD0E3FF"/>
+        <!-- Text color for selected rows (changed from default white) -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+        <!-- Inactive selection colors -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#FFE8F2FF"/>
+        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="Black"/>
+      </DataGrid.Resources>
+
+      <!-- Custom row style with proper selection coloring -->
+      <DataGrid.RowStyle>
+        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource {x:Type DataGridRow}}">
+          <!-- Default row appearance -->
+          <Setter Property="Background" Value="White"/>
+          <Setter Property="Foreground" Value="Black"/>
+          <Setter Property="BorderBrush" Value="Transparent"/>
+
+          <Style.Triggers>
+            <!-- Selected row style -->
+            <Trigger Property="IsSelected" Value="True">
+              <!-- Light blue background for selection -->
+              <Setter Property="Background" Value="#FFD0E3FF"/>
+              <!-- Darker blue bottom border -->
+              <Setter Property="BorderBrush" Value="#FFA0C6FF"/>
+              <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            </Trigger>
+
+            <!-- Mouse hover style (lighter than selection) -->
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="#FFE8F2FF"/>
+            </Trigger>
+          </Style.Triggers>
+        </Style>
+      </DataGrid.RowStyle>
+
+      <!-- Column definitions -->
+      <DataGrid.Columns>
+        <!-- Checkbox selection column -->
+        <DataGridCheckBoxColumn Header="{DynamicResource ColumnSelect}" 
+                                Binding="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+          <DataGridCheckBoxColumn.ElementStyle>
+            <Style TargetType="CheckBox">
+              <!-- Make checkbox clickable without double-click -->
+              <Setter Property="IsHitTestVisible" Value="True"/>
+              <Setter Property="Focusable" Value="True"/>
+              <Setter Property="HorizontalAlignment" Value="Center"/>
+              <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+          </DataGridCheckBoxColumn.ElementStyle>
+        </DataGridCheckBoxColumn>
+
+        <!-- Name column with selection-aware styling -->
+        <DataGridTextColumn Header="{DynamicResource ColumnName}"
+                            Binding="{Binding Name}"
+                            IsReadOnly="True"
+                            Width="*">
+          <DataGridTextColumn.ElementStyle>
+            <Style TargetType="TextBlock">
+              <!-- Default text color -->
+              <Setter Property="Foreground" Value="Black"/>
+              <!-- Left alignment with padding -->
+              <Setter Property="TextAlignment" Value="Left"/>
+              <Setter Property="Padding" Value="6,0,0,0"/>
+
+              <!-- Ensure text remains black when selected -->
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=IsSelected}" 
+                                    Value="True">
+                  <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </DataGridTextColumn.ElementStyle>
+        </DataGridTextColumn>
+
+        <!-- Status column with color coding -->
+        <DataGridTextColumn Header="{DynamicResource ColumnStatus}"
+                            Binding="{Binding Status}"
+                            IsReadOnly="True"
+                            Width="*">
+          <DataGridTextColumn.ElementStyle>
+            <Style TargetType="TextBlock">
+              <Setter Property="Foreground" Value="Black"/>
+              <!-- Status-specific colors -->
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding StatusValue}" Value="Success">
+                  <Setter Property="Foreground" Value="Green"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding StatusValue}" Value="NeedsMigration">
+                  <Setter Property="Foreground" Value="Orange"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding StatusValue}" Value="Unknown">
+                  <Setter Property="Foreground" Value="Gray"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding StatusValue}" Value="FileMissing">
+                  <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+
+                <!-- Maintain status colors even when selected -->
+                <MultiDataTrigger>
+                  <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding StatusValue}" Value="Success"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=IsSelected}" Value="True"/>
+                  </MultiDataTrigger.Conditions>
+                  <Setter Property="Foreground" Value="Green"/>
+                </MultiDataTrigger>
+                <!-- Repeat for other status values if needed -->
+              </Style.Triggers>
+            </Style>
+          </DataGridTextColumn.ElementStyle>
+        </DataGridTextColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <!-- Row 4: Migrate Button -->
+    <Button x:Name="MigrateButton"
+                        Grid.Row="4"
                         Content="{DynamicResource ButtonMigrate}"
                         Width="120"
                         Margin="0,10,0,0"
                         Click="MigrateButton_Click"
                         Visibility="Hidden"/>
-
-                <!-- Menu -->
-                <Menu Grid.Row="0"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Top">
-                        <MenuItem Header="{DynamicResource MenuLanguage}">
-                                <MenuItem Header="{DynamicResource MenuChinese}"
-                                          Click="LanguageChinese_Click"/>
-                                <MenuItem Header="{DynamicResource MenuEnglish}"
-                                          Click="LanguageEnglish_Click"/>
-                        </MenuItem>
-                        <MenuItem Header="{DynamicResource MenuAbout}"
-                                  Click="About_Click"/>
-                </Menu>
-        </Grid>
+  </Grid>
 </Window>

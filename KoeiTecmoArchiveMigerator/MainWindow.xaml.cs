@@ -19,7 +19,7 @@ namespace KoeiTecmoArchiveMigrator
     private const int DEVICE_FLAG_LENGTH = 8;
 
     private ObservableCollection<ArchiveItem> archiveItems = new ObservableCollection<ArchiveItem>();
-    private byte[] autoDeviceFlag;
+    private byte[]? autoDeviceFlag;
 
     public MainWindow()
     {
@@ -56,6 +56,7 @@ namespace KoeiTecmoArchiveMigrator
         {
           var dirs = Directory.GetDirectories(rootDir).Select(Path.GetFileName);
           foreach (var dir in dirs) GameComboBox.Items.Add(dir);
+          if (dirs.Count() > 0) GameComboBox.SelectedIndex = 0;
         }
       }
       catch (Exception ex)
@@ -82,6 +83,7 @@ namespace KoeiTecmoArchiveMigrator
         {
           var dirs = Directory.GetDirectories(gameDir).Select(Path.GetFileName);
           foreach (var dir in dirs) SteamIdComboBox.Items.Add(dir);
+          if (dirs.Count() > 0) SteamIdComboBox.SelectedIndex = 0;
         }
       }
       catch (Exception ex)
@@ -195,34 +197,48 @@ namespace KoeiTecmoArchiveMigrator
 
     private void ShowError(string message)
     {
-      MessageBox.Show(message, (string)Application.Current.Resources["ErrorTitle"],
-            MessageBoxButton.OK, MessageBoxImage.Error);
+      MessageBox.Show(message, (string)Application.Current.Resources["ErrorTitle"], MessageBoxButton.OK, MessageBoxImage.Error);
       ArchiveDataGrid.IsEnabled = false;
       MigrateButton.Visibility = Visibility.Hidden;
     }
 
     private void LanguageChinese_Click(object sender, RoutedEventArgs e)
     {
+      ChineseMenuItem.IsChecked = true;
+      EnglishMenuItem.IsChecked = false;
+
       SetLanguage("zh-CN");
     }
 
     private void LanguageEnglish_Click(object sender, RoutedEventArgs e)
     {
+      EnglishMenuItem.IsChecked = true;
+      ChineseMenuItem.IsChecked = false;
+
       SetLanguage("en-US");
     }
 
     private void SetLanguage(string culture)
     {
-      // 1. Load new language resource
-      var dict = new ResourceDictionary();
-      dict.Source = new Uri($"/Resources/Lang.{culture}.xaml", UriKind.Relative);
+      try
+      {
+        // 1. Load new language resource
+        var dict = new ResourceDictionary
+        {
+          Source = new Uri($"Resources/Lang.{culture}.xaml", UriKind.Relative)
+        };
 
-      // 2. Replace current resources
-      Application.Current.Resources.MergedDictionaries.Clear();
-      Application.Current.Resources.MergedDictionaries.Add(dict);
+        // 2. Replace current resources
+        Application.Current.Resources.MergedDictionaries.Clear();
+        Application.Current.Resources.MergedDictionaries.Add(dict);
 
-      // 3. Refresh UI (needed for dynamic texts in code)
-      LoadArchives();
+        // 3. Refresh UI
+        // LoadArchives();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show($"Failed to load language resources: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+      }
     }
 
     private string GetResources(string key)
