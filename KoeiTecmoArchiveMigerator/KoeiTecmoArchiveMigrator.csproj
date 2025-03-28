@@ -6,10 +6,20 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
+		<ApplicationIcon>Resources\merge_23754.ico</ApplicationIcon>
+		<SignAssembly>True</SignAssembly>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>full</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>full</DebugType>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Resources\" />
+	  <Content Include="Resources\merge_23754.ico" />
 	</ItemGroup>
 
 </Project>
