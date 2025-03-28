@@ -234,7 +234,7 @@ namespace KoeiTecmoArchiveMigrator
         Application.Current.Resources.MergedDictionaries.Add(dict);
 
         // 3. Refresh UI
-        RefreshDataGridHeaders();
+        // RefreshDataGridHeaders();
       }
       catch (Exception ex)
       {
@@ -242,16 +242,16 @@ namespace KoeiTecmoArchiveMigrator
       }
     }
 
-    private void RefreshDataGridHeaders()
-    {
-      foreach (var column in ArchiveDataGrid.Columns)
-      {
-        if (column.Header is string headerText)
-        {
-          column.Header = new DynamicResourceExtension(headerText).ProvideValue(null);
-        }
-      }
-    }
+    // private void RefreshDataGridHeaders()
+    // {
+    //   foreach (var column in ArchiveDataGrid.Columns)
+    //   {
+    //     if (column.Header is string headerText)
+    //     {
+    //       column.Header = new DynamicResourceExtension(headerText).ProvideValue(null);
+    //     }
+    //   }
+    // }
 
     private string GetResources(string key)
     {

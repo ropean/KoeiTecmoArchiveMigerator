@@ -8,18 +8,20 @@
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>Resources\merge_23754.ico</ApplicationIcon>
 		<SignAssembly>True</SignAssembly>
+		<PublishSingleFile>true</PublishSingleFile>
+		<SelfContained>false</SelfContained>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DebugType>full</DebugType>
+		<DebugType>full</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DebugType>full</DebugType>
+		<DebugType>full</DebugType>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Include="Resources\merge_23754.ico" />
+		<Content Include="Resources\merge_23754.ico" />
 	</ItemGroup>
 
 </Project>
