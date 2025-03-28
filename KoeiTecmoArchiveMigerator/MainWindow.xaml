@@ -130,7 +130,7 @@
       <!-- Column definitions -->
       <DataGrid.Columns>
         <!-- Checkbox selection column -->
-        <DataGridCheckBoxColumn Header="{DynamicResource ColumnSelect}" 
+        <DataGridCheckBoxColumn Header="ColumnSelect" 
                                 Binding="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
           <DataGridCheckBoxColumn.ElementStyle>
             <Style TargetType="CheckBox">
@@ -144,7 +144,7 @@
         </DataGridCheckBoxColumn>
 
         <!-- Name column with selection-aware styling -->
-        <DataGridTextColumn Header="{DynamicResource ColumnName}"
+        <DataGridTextColumn Header="ColumnName"
                             Binding="{Binding Name}"
                             IsReadOnly="True"
                             Width="*">
@@ -168,7 +168,7 @@
         </DataGridTextColumn>
 
         <!-- Status column with color coding -->
-        <DataGridTextColumn Header="{DynamicResource ColumnStatus}"
+        <DataGridTextColumn Header="ColumnStatus"
                             Binding="{Binding Status}"
                             IsReadOnly="True"
                             Width="*">

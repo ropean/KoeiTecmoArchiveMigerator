@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace KoeiTecmoArchiveMigrator
 {
@@ -233,11 +234,22 @@ namespace KoeiTecmoArchiveMigrator
         Application.Current.Resources.MergedDictionaries.Add(dict);
 
         // 3. Refresh UI
-        // LoadArchives();
+        RefreshDataGridHeaders();
       }
       catch (Exception ex)
       {
         MessageBox.Show($"Failed to load language resources: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+      }
+    }
+
+    private void RefreshDataGridHeaders()
+    {
+      foreach (var column in ArchiveDataGrid.Columns)
+      {
+        if (column.Header is string headerText)
+        {
+          column.Header = new DynamicResourceExtension(headerText).ProvideValue(null);
+        }
       }
     }
 
