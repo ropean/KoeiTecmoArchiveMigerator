@@ -45,11 +45,6 @@ A Windows utility for migrating Koei Tecmo game save files, automatically fixing
 | --------------------------- | ------------------------------ |
 | ![English](./images/ui.png) | ![Chinese](./images/ui-CN.png) |
 
-**Note**:
-
-- Left: English interface (`ui.png`)
-- Right: Chinese interface (`ui-CN.png`)
-
 ## ⚙ Technical Implementation
 
 ```csharp
